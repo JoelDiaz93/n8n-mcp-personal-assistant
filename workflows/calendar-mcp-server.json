@@ -1,0 +1,181 @@
+{
+  "name": "MCP Google Calendar - Server",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "path": "fernando/google/calendar"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        -288
+      ],
+      "id": "cdb68939-ae0d-4f4e-b0bd-36dd0208823a",
+      "name": "MCP Google Calendar",
+      "webhookId": "REGENERATE_ON_IMPORT"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "user@example.com",
+          "mode": "list",
+          "cachedResultName": "user@example.com"
+        },
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', ``, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -176,
+        -16
+      ],
+      "id": "309859ab-067d-4c2e-b09d-6e98dbeb01b9",
+      "name": "obtener_eventos_calendario"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "user@example.com",
+          "mode": "list",
+          "cachedResultName": "user@example.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "useDefaultReminders": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Use_Default_Reminders', ``, 'boolean') }}",
+        "additionalFields": {
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
+          "location": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Location', ``, 'string') }}",
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -48,
+        -16
+      ],
+      "id": "7d4debcc-0d37-4823-9ef7-d736f154e9e8",
+      "name": "crear_eventos_calendario"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "user@example.com",
+          "mode": "list",
+          "cachedResultName": "user@example.com"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        80,
+        -16
+      ],
+      "id": "523fac03-1f76-4e44-923a-fdf95e157386",
+      "name": "eliminar_evento"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "calendar": {
+          "__rl": true,
+          "value": "user@example.com",
+          "mode": "list",
+          "cachedResultName": "user@example.com"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        -16
+      ],
+      "id": "2b0675f0-bc37-49f4-8404-4c511c9fd17c",
+      "name": "obtener_unico_evento"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "obtener_eventos_calendario": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Google Calendar",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "crear_eventos_calendario": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Google Calendar",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "eliminar_evento": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Google Calendar",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener_unico_evento": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Google Calendar",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "fe5a8f7d-4aff-4d5b-8269-1ea1b7f0fc14",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "VI4u0EA96L8Db0Df",
+  "tags": [
+    {
+      "name": "MCP",
+      "id": "GGq4yVTvG608Wk86",
+      "createdAt": "2025-08-26T12:49:08.376Z",
+      "updatedAt": "2025-08-26T12:49:08.376Z"
+    },
+    {
+      "name": "Server",
+      "id": "XuJJGcaBhEI9Arqu",
+      "createdAt": "2025-08-26T12:49:12.060Z",
+      "updatedAt": "2025-08-26T12:49:12.060Z"
+    }
+  ]
+}

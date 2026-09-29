@@ -1,0 +1,119 @@
+{
+  "name": "Pokemon finder Tool",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"name\": \"Pikachu\"\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -192,
+        -96
+      ],
+      "id": "ac8f3bae-c21c-43ca-83de-52ee4ed3625b",
+      "name": "Inicio - Datos de entrada"
+    },
+    {
+      "parameters": {
+        "url": "=https://pokeapi.co/api/v2/pokemon/{{ $json.name.trim().toLowerCase() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        16,
+        -96
+      ],
+      "id": "47f8ab35-c0a8-4d0a-b245-0b5dc005f71d",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "62fd6913-09f2-480a-8bbd-a2769ae248fd",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "number"
+            },
+            {
+              "id": "7ddb9fa0-d034-4a41-88d1-cbf767b06cf8",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "2a045bf9-a1c9-41cd-886c-c69c7d47bb8e",
+              "name": "sprites.back_default",
+              "value": "={{ $json.sprites.back_default }}",
+              "type": "string"
+            },
+            {
+              "id": "988e8328-7048-4b3e-b565-2c34142c148c",
+              "name": "sprites.front_default",
+              "value": "={{ $json.sprites.front_default }}",
+              "type": "string"
+            },
+            {
+              "id": "ebfcdaed-4e0c-4784-b2a7-638badfb431e",
+              "name": "weight",
+              "value": "={{ $json.weight }}",
+              "type": "number"
+            },
+            {
+              "id": "54795bd0-bdf9-48a5-8b1b-97a07ddedc8a",
+              "name": "types",
+              "value": "={{ $json.types.map(item => item.type).map(item => item.name) }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        -96
+      ],
+      "id": "d2b2d323-68e2-4278-902f-c57da7d49102",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Inicio - Datos de entrada": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d62498a3-4919-4914-8c4c-f63816a5416d",
+  "meta": {},
+  "id": "gz2xL0qAcXXNBz8A",
+  "tags": []
+}
